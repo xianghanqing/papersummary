@@ -67,7 +67,11 @@ def downloadArticles(outfpath, p, apikey):
         print(rem, "volumes out of", len(volumes), "volumes remaining")
 
 
-def downloadArticlesFromList(inlist, exarticles, outfpath, apikey):
+def downloadArticlesFromList(inlist, exarticles, outfpath, apikey,resume):
+    startpoint = 0
+    if resume == True:
+        with open('D:\papersummary\DataDownloader\Data\startpoint.txt', encoding='utf-8') as pointf:
+            startpoint = int(pointf.readlines()[0])
 
     existarts = []
     for f in os.listdir(exarticles):
@@ -85,7 +89,8 @@ def downloadArticlesFromList(inlist, exarticles, outfpath, apikey):
     start_time = time.time()
     download_times = []
     for i, pii in enumerate(infl):
-
+        if i < startpoint:
+            continue
         #pii = str(art).replace("http://api.elsevier.com/content/article/pii/", "")
         #if pii + ".xml" in flist:
         #    flist.remove(pii + ".xml")
@@ -100,11 +105,28 @@ def downloadArticlesFromList(inlist, exarticles, outfpath, apikey):
         else:
             print(pii, i+1, len(infl), end="\r")
 
-        piir = "http://api.elsevier.com/content/article/PII:" + pii + "?httpAccept=text/xml&APIKey=" + apikey
+        piir = "https://api.elsevier.com/content/article/PII:" + pii + "?httpAccept=text/xml&APIKey=" + apikey
 
+        print("下载到文件夹XML_Papers...："+pii)
         download_start_time = time.time()
-        local_filename, headers = urllib.request.urlretrieve(piir)
-        shutil.copy(local_filename, outfpath + pii + ".xml")
+        #exception
+        try:
+            local_filename, headers = urllib.request.urlretrieve(piir)
+            shutil.copy(local_filename, outfpath + pii + ".xml")
+        except:
+            print("504..................")
+            startpoint = i
+            if os.path.exists(outfpath + pii + ".xml"):
+                startpoint = startpoint+1
+                print("..................断点下载下一篇")
+            else:
+                print("..................下载失败，重新下载这篇")
+            with open('D:\papersummary\DataDownloader\Data\startpoint.txt', mode='w', encoding='utf-8') as pointf:
+                pointf.write(str(startpoint))
+            downloadArticlesFromList('D:\papersummary\DataDownloader\cspubsum_ids.txt',
+                                     "Data/XML_Papers/", "Data/XML_Papers/", "84f539869a2abf80513c44bdf12ece45", True)
+
+
         download_time = time.time() - download_start_time
         if len(download_times) < 50:
             download_times.append(download_time)
@@ -173,8 +195,8 @@ if __name__ == '__main__':
     '''
 
     # The base directory of the project, from the root directory
-    BASE_DIR = "/Users/edcollins/Documents/CS/4thYearProject/Code/Dev"
-
+    #BASE_DIR = "/Users/edcollins/Documents/CS/4thYearProject/Code/Dev"
+    BASE_DIR= 'D:/papersummary'
     #downloadArticlesFromList("/Users/Isabelle/Documents/UCLMR/articles_todownload_oa_cs2.txt", "/Users/Isabelle/Documents/UCLMR/ccby-articles_text", "/Users/Isabelle/Documents/UCLMR/oa-articles-cs_xml/")
 
     downloadArticlesFromList(BASE_DIR + "/DataDownloader/cspubsum_test_ids.txt", BASE_DIR + "/DataDownloader/Test2/",
