@@ -292,7 +292,7 @@ def parseXML(fpath, write_loc):
       abstract_title = "@&#ABSTRACT@&#\n\n"
       f.write(abstract_title)
       string = Handler.abstract + "\n\n"
-      f.write(string)
+      f.write(string,encodings='utf-8')
 
       # Write the main test
       for n, t in Handler.text.items():
