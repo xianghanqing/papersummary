@@ -4,7 +4,8 @@
 # ====> XML PARSING CLASS
 
 import sys
-sys.path.insert(0, "/Users/edcollins/Documents/CS/4thYearProject/Code")
+sys.path.insert(0, "D:/papersummary")
+#sys.path.insert(0, "/Users/edcollins/Documents/CS/4thYearProject/Code")
 import xml.sax
 import collections
 import os

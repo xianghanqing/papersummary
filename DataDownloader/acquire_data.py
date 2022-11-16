@@ -2,7 +2,8 @@
 
 import os
 import sys
-sys.path.insert(0, "/Users/edcollins/Documents/CS/4thYearProject/Code")
+#sys.path.insert(0, "/Users/edcollins/Documents/CS/4thYearProject/Code")
+sys.path.insert(0, "D:/papersummary")
 from Dev.DataDownloader.sciencedirect_collect import downloadArticlesFromList
 from Dev.DataDownloader.xml_utils import parseXMLAll
 

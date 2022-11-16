@@ -1,5 +1,6 @@
 import sys
-sys.path.insert(0, "/Users/edcollins/Documents/CS/4thYearProject/Code")
+#sys.path.insert(0, "/Users/edcollins/Documents/CS/4thYearProject/Code")
+sys.path.insert(0, "D:/papersummary")
 import os
 import urllib
 import urllib.request
