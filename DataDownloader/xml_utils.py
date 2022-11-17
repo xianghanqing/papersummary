@@ -268,7 +268,7 @@ def parseXML(fpath, write_loc):
       name = filename
 
       # Open the file
-      f = open(write_loc + name, "w")
+      f = open(write_loc + name, "w",encoding='utf-8')
 
       # Write the title
       title = "@&#MAIN-TITLE@&#" + Handler.title + "\n\n"
@@ -292,7 +292,7 @@ def parseXML(fpath, write_loc):
       abstract_title = "@&#ABSTRACT@&#\n\n"
       f.write(abstract_title)
       string = Handler.abstract + "\n\n"
-      f.write(string,encodings='utf-8')
+      f.write(string)
 
       # Write the main test
       for n, t in Handler.text.items():
