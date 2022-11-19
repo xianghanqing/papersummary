@@ -7,12 +7,12 @@ from __future__ import print_function, division
 import sys
 sys.path.insert(0, "/Users/edcollins/Documents/CS/4thYearProject/Code")
 from nltk.tokenize import sent_tokenize, word_tokenize
-from Dev.DataTools.Reader import Reader
-from Dev.DataTools.SentenceComparator import SentenceComparator
+from DataTools.Reader import Reader
+from DataTools.SentenceComparator import SentenceComparator
 from nltk.tokenize import sent_tokenize
 from collections import defaultdict
 from gensim.models import Word2Vec
-from Dev.Evaluation.rouge import Rouge
+from Evaluation.rouge import Rouge
 from operator import itemgetter
 import numpy as np
 import tensorflow as tf
@@ -29,11 +29,10 @@ import ujson as json
 # ================ CONFIG VARIABLES ================
 
 # The base directory of the project, from the root directory
-BASE_DIR = "/Users/edcollins/Documents/CS/4thYearProject/Code/Dev"
-
+BASE_DIR = "D:/papersummary"
 # The path to the directory in which the papers are stored
-PAPER_SOURCE = BASE_DIR + "/Data/Papers/Full/Papers_With_Section_Titles/"
-
+#PAPER_SOURCE = BASE_DIR + "/Data/Papers/Full/Papers_With_Section_Titles/"
+PAPER_SOURCE = BASE_DIR + "/DataDownloader/Data/XML_Papers/"
 # The source of the highlights - where each file in the directory contains the highlights for that paper
 HIGHLIGHT_SOURCE = BASE_DIR + "/Data/Papers/Sections/highlights/"
 

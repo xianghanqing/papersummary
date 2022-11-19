@@ -67,12 +67,8 @@ def downloadArticles(outfpath, p, apikey):
         print(rem, "volumes out of", len(volumes), "volumes remaining")
 
 
-def downloadArticlesFromList(inlist, exarticles, outfpath, apikey,resume):
-    startpoint = 0
-    if resume == True:
-        with open('D:\papersummary\DataDownloader\Data\startpoint.txt', encoding='utf-8') as pointf:
-            startpoint = int(pointf.readlines()[0])
-
+def downloadArticlesFromList(inlist, exarticles, outfpath, apikey):
+    startpoint = len(os.listdir('D:/papersummary/DataDownloader/Data/XML_Papers'))
     existarts = []
     for f in os.listdir(exarticles):
         if f.strip().endswith(".txt"):
@@ -114,17 +110,9 @@ def downloadArticlesFromList(inlist, exarticles, outfpath, apikey,resume):
             local_filename, headers = urllib.request.urlretrieve(piir)
             shutil.copy(local_filename, outfpath + pii + ".xml")
         except:
-            print("504..................")
-            startpoint = i
-            if os.path.exists(outfpath + pii + ".xml"):
-                startpoint = startpoint+1
-                print("..................断点下载下一篇")
-            else:
-                print("..................下载失败，重新下载这篇")
-            with open('D:\papersummary\DataDownloader\Data\startpoint.txt', mode='w', encoding='utf-8') as pointf:
-                pointf.write(str(startpoint))
+            print("504..................正在重试")
             downloadArticlesFromList('D:\papersummary\DataDownloader\cspubsum_ids.txt',
-                                     "Data/XML_Papers/", "Data/XML_Papers/", "84f539869a2abf80513c44bdf12ece45", True)
+                                     "Data/XML_Papers/", "Data/XML_Papers/", "84f539869a2abf80513c44bdf12ece45")
 
 
         download_time = time.time() - download_start_time

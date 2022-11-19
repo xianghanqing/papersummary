@@ -73,11 +73,11 @@ import ujson as json
 from operator import itemgetter
 from multiprocessing import Pool
 import numpy as np
-sys.path.insert(0, "/Users/edcollins/Documents/CS/4thYearProject/Code")
-from Dev.DataTools import useful_functions
-from Dev.DataTools.useful_functions import wait, BASE_DIR, PAPER_SOURCE, GLOBAL_WORDCOUNT_WRITE_LOC,\
+sys.path.insert(0, "D:/papersummary")
+from DataTools import useful_functions
+from DataTools.useful_functions import wait, BASE_DIR, PAPER_SOURCE, GLOBAL_WORDCOUNT_WRITE_LOC,\
     TRAINING_DATA_WRITE_LOC, Color, NUMBER_OF_PAPERS
-from Dev.Evaluation.rouge import Rouge
+from Evaluation.rouge import Rouge
 
 
 # ===================================
